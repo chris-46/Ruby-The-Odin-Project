@@ -6,7 +6,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 
 ## Course Outline
 ### Introduction
-- How This Course Will Work
+- How This Course Will Work ✅
 - Installing Ruby
 
 ### Basic Ruby
