@@ -5,12 +5,12 @@ I'm learning Ruby, the language designed specifically for programmer happiness!
 I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby), with the goal being having a good understanding of the fundamentals on implementing things in Ruby. 
 
 ## Course Outline
-### Introduction
-- How This Course Will Work ✅
-- Installing Ruby
+### Introduction ✅
+- How This Course Will Work 
+- Installing Ruby 
 
 ### Basic Ruby
-- Basic Data Types
+- Basic Data Types ✅
 - Variables
 - Input and Output
 - Conditional Logic
