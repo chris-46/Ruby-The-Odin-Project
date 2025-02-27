@@ -7,7 +7,8 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 ## Course Outline
 ### Introduction ✅
 - How This Course Will Work 
-- Installing Ruby 
+- Installing Ruby
+  - [RubyInstaller](https://rubyinstaller.org/) & Ruby LSP Extension for VSCode   
 
 ### Basic Ruby
 - Basic Data Types ✅
