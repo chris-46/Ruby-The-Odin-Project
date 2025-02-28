@@ -13,7 +13,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 ### Basic Ruby
 - Basic Data Types ✅
 - Variables ✅
-- Input and Output
+- Input and Output ✅
 - Conditional Logic
 - Loops
 - Arrays
