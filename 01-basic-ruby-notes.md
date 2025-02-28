@@ -305,7 +305,7 @@ The following questions are an opportunity to reflect on key topics in this less
 https://www.theodinproject.com/lessons/ruby-basic-data-types
 
 
-# Variables
+<h1 align="center"> Variables</h1>
 
 **Variables are references**.
 
@@ -337,3 +337,8 @@ Here,  the **upcase!** method was used instead of the safe **upcase** method.
 - If the string is modified using **johns_location.upcase!** then **desired_location** will also reflect that change.
 
 Point being, be aware that variables are references, and that some methods may or may not affect the referenced memory address location.
+
+
+<h1 align="center"> Input and Output</h1>
+
+
