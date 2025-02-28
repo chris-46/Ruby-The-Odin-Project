@@ -341,4 +341,33 @@ Point being, be aware that variables are references, and that some methods may o
 
 <h1 align="center"> Input and Output</h1>
 
+# Output: puts vs. print
+**puts** *puts* and extra newline at the end of its output; **print** does not.
 
+Observe the example below. It uses the semicolon which allows you to run multiple Ruby commands on one line.
+- Generally this type of [code golf]() is not receommended, but helpful in this case.
+- In a REPL like replit.com, you don't need the semicolons and it will be able to produce the desired output.
+- The **irb**, however, requires the semicolons since it can only read one statement at a time.
+
+## print
+irb(main):001:0> print "Hello World"; print "I love drinking coffee"
+
+Hello WorldI love drinking coffee=> nil
+
+## puts
+irb(main):002:0> puts "Hello World"; puts "I love drinking coffee"
+
+Hello World
+
+I love drinking coffee
+
+=> nil
+
+# Input
+## gets
+The gets command to accepts user input, during which **program execution will stop** and await user input. The program continues its execution after the user presses **Enter**.
+
+Note that **gets** returns the **user input** instead of nil, which is convenient as it can be immediately assigned to a variable for later use.
+
+Also, **gets** always returns a new line at the end of input.
+- **#chomp** is a method commonly used to trim separators. That is, **gets.chomp** will obtain the user input without appending a trailing newline character.
