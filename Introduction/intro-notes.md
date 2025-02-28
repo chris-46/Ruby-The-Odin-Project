@@ -15,7 +15,7 @@ Ruby can allow you to write a task that might take dozens of lines in Java or a 
 - In the fifth section, you’ll learn the basics of **test-driven development**.
 - In the sixth and final section, you’ll tie everything together by building a fully fledged **chess game**.
 
-## [About Ruby]("https://en.wikipedia.org/wiki/Ruby_(programming_language)")
+## [About Ruby from Wikipedia]("https://en.wikipedia.org/wiki/Ruby_(programming_language)")
 - Yukihiro "Matz" Matusumoto in 1993 ➡️ Easy-to-use, Object-oriented, minimal syntax.
     - Everything is an **object**
 - Ruby is **interpreted**, **dynamically typed**, uses **garbage collection**, and **just-in-time compilation**.

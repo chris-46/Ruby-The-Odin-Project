@@ -250,7 +250,7 @@ In Ruby, nil represents “nothing”.
 - Everything in Ruby has a **return value**. When a piece of code doesn’t have anything to return, it will return nil. 
 
 
-# Knowledge check
+# Knowledge check - Basic Data Types
 The following questions are an opportunity to reflect on key topics in this lesson. If you can’t answer a question, click on it to review the material, but keep in mind you are not expected to memorize or master this knowledge.
 
 1. What are the basic arithmetic operators you can use on numbers? 
@@ -303,3 +303,37 @@ The following questions are an opportunity to reflect on key topics in this less
 
 # Additional resources 
 https://www.theodinproject.com/lessons/ruby-basic-data-types
+
+
+# Variables
+
+**Variables are references**.
+
+The information you name with a variable is stored in memory on your computer, so a **variable** is effectively a **reference or a pointer** to that **address in memory**. This is important to know as it can sometimes be the cause of unexpected behavior from your code.
+
+Let’s look at an example of this unexpected behavior, with two variables:
+- **desired_location** is assigned to the string “Barcelona”
+- **johns_location** is assigned to the **desired_location** variable. 
+
+Both variables are pointing to where **“Barcelona”** is stored in memory.
+
+Observe what happens when **“Barcelona”** that is stored in memory is modified:
+
+desired_location = "Barcelona"
+
+johns_location = desired_location
+
+desired_location  #=> "Barcelona"
+
+johns_location    #=> "Barcelona"
+
+johns_location.upcase!  #=> "BARCELONA"
+
+**desired_location      #=> "BARCELONA"**
+
+johns_location          #=> "BARCELONA"
+
+Here,  the **upcase!** method was used instead of the safe **upcase** method.
+- If the string is modified using **johns_location.upcase!** then **desired_location** will also reflect that change.
+
+Point being, be aware that variables are references, and that some methods may or may not affect the referenced memory address location.
