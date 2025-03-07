@@ -371,3 +371,178 @@ Note that **gets** returns the **user input** instead of nil, which is convenien
 
 Also, **gets** always returns a new line at the end of input.
 - **#chomp** is a method commonly used to trim separators. That is, **gets.chomp** will obtain the user input without appending a trailing newline character.
+
+<h1 align="center"> Conditional Logic</h1>
+
+# Overview
+ - **Falsy** values
+ - if, elsif, else
+ - if vs. unless
+ - ||, &&, !
+ - Short circuit evaluation
+ - Ternary operator
+ - Case statements
+
+# Falsy Values
+
+ In Ruby, everything except for **nil** and **false** are considered **true**.
+ 
+ &rarr; 0 and "" do not evaluate to false!
+
+
+ # if, elsif, else
+
+## Basic Example
+if attack_by_land == true  
+&ensp;&ensp; puts "release the goat"  
+elsif attack_by_sea == true  
+&ensp;&ensp; puts "release the shark"  
+else  
+&ensp;&ensp; puts "release Kevin the octopus"  
+end
+
+- There is one **end** in an if .. elsif .. else block.
+
+## One-line ifs
+puts "Hot diggity damn, 1 is less than 2" **if 1 < 2** 
+- Note the lack of **end** statement as well.
+
+# Boolean Logic  
+== &rarr; returns true if values compared are equal.
+
+!= &rarr; returns true if values compared are not equal.
+
+
+\>, <, >=, <= &rarr; work as expected
+
+**#eql?** &rarr; Checks both the value **type** and the **actual value** it holds.
+- 5.eql?(5.0) &rarr; false; although they are the same value, one is an integer and the other is a float  
+- 5.eql?(5)   #=> true
+
+**#equal?** &rarr; Checks if both values are **exactly the same object in memory**.
+### Contrast:  
+a = 5  
+b = 5  
+a.equal?(b) &rarr; true
+
+### and:
+a = "hello"  
+b = "hello"  
+a.equal?(b) #=> false
+
+- Recall that strings that are appear the same are still created as two separate string objects in memory.
+
+# Spaceship Operator <=> (LvR)
+Most commonly used in **sorting functions**, <=> returns one of three numerical values:  
+- -1 if the value on the left is less than the value on the right;
+- 0 if the value on the left is equal to the value on the right; and
+- 1 if the value on the left is greater than the value on the right.
+
+## Examples 
+- 5 <=> 10    #=> -1
+- 10 <=> 10   #=> 0
+- 10 <=> 5    #=> 1
+
+# Logical Operators
+## [Operator Precedence Table in Ruby](https://phrogz.net/programmingruby/language.html#table_18.4)
+   - ![alt text](images/OoO.png "Operator Precedence")
+   
+   - Most importantly, though, **and** and **or** logical operators are factored in **after** assignment.
+
+## ANDs (&&, and) and ORs (||, or)
+- The **and** and && operators evaluate their first operand. If false, the expression returns false; otherwise, the expression returns the value of the second operand.
+- The **or** and || operators evaluate their first operand. If true, the expression returns true; otherwise, the expression returns the value of the second operand.
+
+The differences will be illustrated below.
+
+### || and &&, "or" and "and" Examples 
+nil || 42 &rarr; 42  
+42 && 23 &rarr; 23
+
+nil **or** 42 &rarr; 42  
+42 **and** 23 &rarr; 23
+
+### && vs. and
+user = Struct.new(:name).new("Avdi")  
+user_name = user && user.name  
+\# user_name &rarr; "Avdi"
+
+user = Struct.new(:name).new("Avdi")  
+user_name = user **and** user.name
+\# user_name &rarr; "\# \<struct name="Avdi"\>
+
+This is because of their operator precedence, as highlighted below:  
+- user_name = (user && user.name)  
+- (user_name = user) and user.name
+
+### || vs. or
+:x || :y && nil \# &rarr; :x  
+:x **or** :y **and** nil \# &rarr; :nil
+
+because:
+- :x || (:y && nil) \# &rarr; :x, && takes priority over ||.  
+- (:x **or** :y) **and** nil \# &rarr; :nil, **or** and **and** have the same precedence.
+
+# Case Statements
+Can be much more compact than a whole bunch of if...elsif statements. You can even **assign the return value** to a variable for use later.
+
+## Example
+grade = 'F'
+
+did_i_pass = **case** grade #=> create a variable `did_i_pass` and assign the result of a call to case with the variable grade passed in   
+&emsp;**when** 'A' **then** "Hell yeah!"  
+&emsp;**when** 'D' **then** "Don't tell your mother."  
+&emsp;**else** "'YOU SHALL NOT PASS!' -Gandalf"  
+**end**
+
+\# In case you wanted multiple lines of code between when statements, simply drop the then:
+
+grade = 'F'
+
+did_i_pass = **case** grade #=> create a variable `did_i_pass` and assign the result of a call to case with the variable grade passed in   
+&emsp;**when**  
+&emsp;&emsp;puts "You're a genius"  
+&emsp;&emsp;future_bank_account_balance = 5_000_000  
+&emsp;**when** 'D'   
+&emsp;&emsp;puts "Better luck next time"  
+&emsp;&emsp;can_i_retire_soon = false    
+&emsp;**else**   
+&emsp;&emsp;puts"'YOU SHALL NOT PASS!' -Gandalf"  
+&emsp;&emsp;fml = true   
+&emsp;**end**
+
+# Unless Statements
+An unless statement works in the **opposite** way as an **if** statement: it only processes the code in the block if the expression evaluates to false.
+- Use the **unless** statement when you want to **not** do something if a condition is true. It's more readable than **if !true**
+
+## Example
+age = 19  
+puts "Welcome to a life of debt." **unless** age < 18
+
+**unless** age < 18  
+&emsp;puts "Down with that sort of thing."  
+else  
+&emsp;puts "Careful now!"  
+end
+
+# Ternary Operator
+**if...else** in one line!
+- Its syntax is **condition** ? \<execute if true> : \<execute if false>. 
+- You can assign the return value of the expression to a variable.
+
+## Example
+age = 19  
+response = **age < 18** ? **"You still have your entire life ahead of you."** : **"You're all grown up."**  
+puts response #=> "You're all grown up."
+
+### An equivalent but much more verbose **if...else**
+age = 19  
+if age < 18  
+&emsp;response = "You still have your entire life ahead of you."  
+else  
+&emsp;response = "You're all grown up."  
+end
+
+puts response #=> "You're all grown up."
+
+<h1 align="center"> Loops </h1>
