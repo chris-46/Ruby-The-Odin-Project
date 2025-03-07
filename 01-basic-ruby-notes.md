@@ -546,3 +546,94 @@ end
 puts response #=> "You're all grown up."
 
 <h1 align="center"> Loops </h1>
+
+## Overview
+- Explain what a loop is and why it’s useful.  
+- Explain what a **loop** loop is and how to use it.  
+- Explain what a **while** loop is and how to use it.  
+- Explain what a **for** loop is and how to use it.  
+- Explain what a **#times** loop is and how to use it.  
+- Explain what an **until** loop is and how to use it.  
+- Explain what **#upto** and **#downto** loops are and how to use them.
+
+# Loop
+The **loop** loops are infinite loops that will keep going until you request for it to stop using the **break** command (typically used with a condition).
+
+i = 0  
+loop do  
+&emsp;puts "i is #{i}"  
+&emsp;i += 1  
+&emsp;break if i == 10  
+end
+
+# While loop
+The **while** loops are similar to the **loop** loops except that you declare the condition that will break out of the loop up front.
+
+i = 0  
+while i < 10 do    
+&emsp;puts "i is #{i}"  
+&emsp;i += 1  
+end
+
+You can also use while loops to wait for a particular response:  
+
+while gets.chomp != "yes" do  
+&emsp;puts "Are we there yet?"  
+end
+
+# Until loop
+The **until** loop is the opposite of the **while** loop. A **while** loop continues for as long as the condition is **true**, whereas an **until** loop continues for as long as the condition is **false**. These two loops can therefore be used pretty much interchangeably. 
+- The **break** condition will determine which one is more readable. (i.e. avoid **nots** in the conditions)
+
+Rewriting our **while** loops into **until** loops:  
+
+i = 0  
+until i >= 10 do  
+&emsp;puts "i is #{i}"  
+&emsp;i += 1  
+end
+
+Also: 
+
+until gets.chomp == "yes" do  
+&emsp;puts "Do you like Pizza?"  
+end
+
+# Ranges
+Ranges define an **interval**.
+
+Ranges can be **exclusive or inclusive**
+- (1..5)      # inclusive range: 1, 2, 3, 4, 5  
+- (1...5)     # exclusive range: 1, 2, 3, 4  
+
+We can make ranges of letters, too!
+- ('a'..'d')  # a, b, c, d
+
+# For loop
+A **for** loop is used to iterate through a collection of information such as an array or range. These loops are useful if you need to do something a given number of times while also using an iterator.
+
+for i in 0..5  
+&emsp;puts "#{i} zombies incoming!"
+end
+
+# Times loop
+Use this to run a loop for **specified** number of times.
+- It also accesses the number it's currently iterating through, starting from a **zero index**.
+
+5.times do  
+&emsp;puts "Hello, world!"  
+end
+
+5.times do |number|  
+&emsp;puts "Alternative fact number #{number}"
+end
+
+# Upto and Downto loops
+The Ruby methods **#upto** and **#downto** do exactly what you’d think they do from their names. You can use these methods to iterate **from a starting number** either up to or down **to another number**, respectively.
+- Both **upto** and **downto** include the **boundaries** of the specified range.
+
+5.**upto(10)** { |num| print "#{num} " }     #=> 5 6 7 8 9 10
+
+10.**downto(5)** { |num| print "#{num} " }   #=> 10 9 8 7 6 5
+
+If you need to step through a series of numbers (or even letters) within a specific range, then these are the loops for you.
