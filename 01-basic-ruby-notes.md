@@ -637,3 +637,11 @@ The Ruby methods **#upto** and **#downto** do exactly what you’d think they do
 10.**downto(5)** { |num| print "#{num} " }   #=> 10 9 8 7 6 5
 
 If you need to step through a series of numbers (or even letters) within a specific range, then these are the loops for you.
+
+<h1 align="center"> Arrays </h1>
+<h1 align="center"> Hashes </h1>
+<h1 align="center"> Methods </h1>
+<h1 align="center"> Debugging </h1>
+<h1 align="center"> Basic Enumerable Methods </h1>
+<h1 align="center"> Predicate Enumerable Methods </h1>
+<h1 align="center"> Nested Collections </h1>
