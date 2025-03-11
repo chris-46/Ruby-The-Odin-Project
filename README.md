@@ -14,9 +14,9 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Basic Data Types ✅
 - Variables ✅
 - Input and Output ✅
-- Conditional Logic
-- Loops
-- Arrays
+- Conditional Logic ✅
+- Loops ✅
+- Arrays ✅
 - Hashes
 - Methods
 - Debugging
