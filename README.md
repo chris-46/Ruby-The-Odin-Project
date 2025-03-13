@@ -3,7 +3,7 @@
 I'm learning Ruby, the language designed specifically for programmer happiness! 
 
 I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby), with the goal being having a good understanding of the fundamentals on implementing things in Ruby. 
-- In particular, I will be rewriting and going through the notes and examples, trying it out on the **irb** myself and working through several of the **relevant projects** in each section.
+- In particular, I will be rewriting and summarizing the notes, trying out examples and concepts on the **irb**, and working through several of the **relevant projects** in each section.
 
 ## Course Outline
 ### Introduction ✅
