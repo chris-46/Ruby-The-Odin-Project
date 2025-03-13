@@ -712,7 +712,7 @@ a.concat(b)   #=> [1, 2, 3, 3, 4, 5]
 [1, 1, 1, 2, 2, 3, 4] - [1, 4]  #=> [2, 2, 3]
 
 # Basic Array Methods
-- **empty, length, reverse, include?, join**
+- **empty?, length, reverse, include?, join**
 - Go to [Other Array Methods](https://docs.ruby-lang.org/en/3.3/Array.html) or my_array_name.methods (very long list of methods).
 
 [].empty?               #=> true  
@@ -730,6 +730,103 @@ a.concat(b)   #=> [1, 2, 3, 3, 4, 5]
 [1, 2, 3].join("-")     #=> "1-2-3" 
 
 <h1 align="center"> Hashes </h1>
+Hashes in Ruby: keys and values!
+
+# Creating Hashes
+Use the curly braces **{}**, but besides that it's open season!
+- Mix up key and value types as you please!
+
+my_hash = {
+  "a random word" => "ahoy",  
+  "Dorothy's math test score" => 94,  
+  "an array" => [1, 2, 3],  
+  "an empty hash within a hash" => {}  
+}
+
+hash = { 9 => "nine", :six => 6 }
+
+
+OR:
+
+my_hash = Hash.new  
+my_hash               #=> {}
+# Accessing Values
+Access elements in a Hash like you would elements in an array!
+
+shoes = {  
+&emsp; "summer" => "sandals",  
+&emsp; "winter" => "boots"  
+}
+
+shoes["summer"]   #=> "sandals"
+
+Note that accessing keys that don't exist in the hash will result in **nil**.
+- Since this behavior in returning nil may wreak havoc in your program, use the **fetch** method that will **raise** a **KeyError** when you try to access a key not in the hash.
+- The **fetch** method can also return a default value instead of raising an error if the given key is not found.
+
+shoes.fetch("hiking")   #=> KeyError: key not found: "hiking"  
+shoes.fetch("hiking", "hiking boots") #=> "hiking boots"
+
+# Adding and Changing Data
+- Add and change data in a hash like you would in an array: **my_hash[key_name] = new_value**
+
+shoes["fall"] = "sneakers"  
+shoes     #=> {"summer"=>"sandals", "winter"=>"boots", "fall"=>"sneakers"}
+
+shoes["summer"] = "flip-flops"  
+shoes     #=> {"summer"=>"flip-flops", "winter"=>"boots", "fall"=>"sneakers"}
+
+# Removing Data
+- Remove data from a hash using the **#delete** method.
+
+shoes.delete("summer")    #=> "flip-flops"  
+shoes                     #=> {"winter"=>"boots", "fall"=>"sneakers"}
+
+# Methods
+- Hashes respond to many of the same methods as arrays since they both employ Ruby's **Enumerable** module &rarr; we'll explore more later.
+- The **#keys** and **#values** methods are particularly useful, and they return the keys and values of a hash respectively as **arrays**.
+
+books = {  
+&emsp;"Infinite Jest" => "David Foster Wallace",  
+&emsp;"Into the Wild" => "Jon Krakauer"  
+}
+
+books.keys      #=> ["Infinite Jest", "Into the Wild"]  
+books.values    #=> ["David Foster Wallace", "Jon Krakauer"]
+
+
+# Merging Two Hashes
+- Use the **#merge** function to (surprise!) merge two hashes.
+- Note that elements which share the **same keys** between hashes will take the value of the **second** hash.
+
+hash1 = { "a" => 100, "b" => 200 }  
+hash2 = { "b" => 254, "c" => 300 }  
+hash1.merge(hash2)      #=> { "a" => 100, "b" => 254, "c" => 300 }
+
+# Symbols as Hash Keys
+- As before, **symbols** are much more performant than strings in Ruby, and they also allow for a much cleaner syntax when defining hashes.
+
+\# 'Rocket' syntax  
+american_cars = {  
+&emsp;:chevrolet => "Corvette",  
+&emsp;:ford => "Mustang",   
+&emsp;:dodge => "Ram"  
+}
+
+\# 'Symbols' syntax
+japanese_cars = {  
+&emsp;honda: "Accord",  
+&emsp;toyota: "Corolla",  
+&emsp;nissan: "Altima"  
+}
+
+- Note that this colon shorthand **only works for synbols**, so { 9: "value"} will get you a syntax error.
+- Also, you will still need to access the values of symbol keys the same way:  
+
+american_cars[:ford]    #=> "Mustang"  
+japanese_cars[:honda]   #=> "Accord"
+
+
 <h1 align="center"> Methods </h1>
 <h1 align="center"> Debugging </h1>
 <h1 align="center"> Basic Enumerable Methods </h1>

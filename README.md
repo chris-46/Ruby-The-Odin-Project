@@ -17,7 +17,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Conditional Logic ✅
 - Loops ✅
 - Arrays ✅
-- Hashes
+- Hashes ✅
 - Methods
 - Debugging
 - Basic Enumerable Methods
