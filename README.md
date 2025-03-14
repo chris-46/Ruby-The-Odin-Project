@@ -20,7 +20,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Arrays ✅
 - Hashes ✅
 - Methods ✅
-- Debugging
+- Debugging ✅
 - Basic Enumerable Methods
 - Predicate Enumerable Methods
 - Nested Collections

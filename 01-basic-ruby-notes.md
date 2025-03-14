@@ -1067,6 +1067,123 @@ puts whisper #=> "hello everybody"
 Writing **whisper.downcase!** is the equivalent of **writing whisper = whisper.downcase.**
 
 <h1 align="center"> Debugging </h1>
+
+# Reading the stack trace
+As the name suggests, the stack trace simply prints each line of in your program that was executed before it crashed.
+
+   - ![alt text](images/01-stack-trace.png "Stack Trace")
+
+The very **first line** will tend to be most useful since they are printed in the reverse order they were invoked, i.e. a stack.
+ - ![alt text](images/01-stack-trace-one-line.png "Stack Trace")
+
+First, this line of the stack trace will tell you **what specific line** caused the runtime error. In the above example, the error was encountered in line 31 of the file bottles.rb. This line also provides a **brief explanation** of the error and the **name of the error**. (In this case, it’s a NameError). And yes, in Ruby, **errors** (**Exceptions**) are also **objects**.
+
+# Debugging with puts
+As expected, debug by putting the outputs of crucial or steps of interest within the buggy program.
+- As an alternative to **puts**, **p** is commonly used for debugging; **p** is a combination of **puts** and **inspect**.
+  - The **inspect** method along with puts allows you to distinguish between the **string** "5" and the **integer** 5. 
+  - puts(5) and puts("5") will return 5, while p(5) and p("5") return 5 and "5" respectively.
+
+irb(main):001:1* def isogram?(string)  
+irb(main):002:1*   original_length = string.length  
+irb(main):003:1*   string_array = string.downcase.split  
+irb(main):004:1*   unique_length = string_array.uniq.length  
+irb(main):005:1*  
+irb(main):006:1*   p unique_length  
+irb(main):007:1*  
+irb(main):008:1*   original_length == unique_length  
+irb(main):009:0> end  
+=> :isogram?  
+irb(main):010:0> isogram?("Odin")  
+1  
+=> false  
+
+## Debugging with puts and nil
+Another reason to use **p** over **puts**: when dealing with empty or nil collections, **p** will output more descriptively. 
+
+puts "Using puts:"  
+puts []  # => nil  
+p "Using p:"  
+p [] # => []
+
+# Debugging with Pry-byebug
+
+**Pry** is a Ruby gem that provides you with an **interactive REPL** while your **program is running**. The REPL provided by Pry is very similar to IRB but has added functionality. 
+- The recommended **Ruby gem for debugging** is **Pry-byebug** and it includes **Pry as a dependency**.\
+  - Pry-byebug adds **step-by-step debugging** and **stack navigation**.
+
+To use **Pry-byebug**:
+- Install it in your terminal by running **gem install pry-byebug**. 
+- Make it available in your program by requiring it at the top of your file with **require 'pry-byebug'**.
+- Finally, to use Pry-byebug, you just need to **call binding.pry** at any point in your program.
+
+To follow along with these examples save the code into a Ruby file (e.g., script.rb) and then run the file in your terminal (saved as 01-pry-byebugs.rb ruby script.rb)
+
+require 'pry-byebug'  
+
+def isogram?(string)  
+&emsp;original_length = string.length  
+&emsp;string_array = string.downcase.split  
+
+&emsp;binding.pry  
+
+&emsp;unique_length = string_array.uniq.length  
+&emsp;original_length == unique_length  
+end
+
+isogram?("Odin")
+
+When your code executes and gets to **binding.pry**, it will open an IRB-like session in your terminal. You can then use that session to **check the values** of anything within the scope of where you included binding.pry. However, keep in mind that **any code written after the binding.pry** statement will **not have been evaluated** during the Pry session.
+
+For example, here original_length and string_array are in scope. However, unique_length is not in scope, because it is written after binding.pry and has not been evaluated yet.
+
+Thus, adding a **binding.pry** line in our code is similar to **creating a breakpoint** in JavaScript.
+
+To see this point in action, try running the following:
+
+require 'pry-byebug'
+
+def yell_greeting(string)  
+&emsp;name = string
+
+&emsp;binding.pry
+
+&emsp;name = name.upcase  
+&emsp;greeting = "WASSAP, #{name}!"  
+&emsp;puts greeting  
+end
+
+yell_greeting("bob")  
+
+During the session, if you check for the value of name, you will notice that you get back the value bob instead of BOB. What value do you think greeting will return? Yup, it will be nil. This is because name = name.upcase and greeting = "WASSAP, #{name}!" occurred after the binding.pry call and were never evaluated.
+
+Using the same example above, you can use one of pry-byebug’s commands to figure out what **name = name.upcase** will return. You won’t need to quit the session or add another binding.pry beneath it. Enter **next** to step over to the **next line**.
+
+[1] pry(main)> name  
+=> "bob"  
+[2] pry(main)> greeting  
+=> nil  
+[3] pry(main)> next  
+
+     5: def yell_greeting(string)
+     6:   name = string
+     7:
+     8:   binding.pry
+     9:
+    10:   name = name.upcase
+ => 11:   greeting = "WASSAP, #{name}!"
+    12:   puts greeting
+    13: end
+
+[4] pry(main)> name
+=> "BOB"
+
+It stops after evaluating the next line. name now returns BOB. Calling **next** again will evaluate the** following line**. Try it out to know what greeting will return. Pry-byebug has a few more commands. Play around with them to get a feel of what they do.
+
+As you can see, using **Pry-byebug** for debugging achieves the same outcome as **puts debugging**: it allows you to **confirm the assumptions** you have about particular parts of your code. 
+
+If your code is complex, Pry-byebug will probably allow you to debug quicker thanks to its **interactive runtime environment**. In such scenarios, Pry-byebug will be **easier to interact** with than having to add puts statements everywhere and re-running your code each time.
+
 <h1 align="center"> Basic Enumerable Methods </h1>
 <h1 align="center"> Predicate Enumerable Methods </h1>
 <h1 align="center"> Nested Collections </h1>
