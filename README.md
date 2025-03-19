@@ -21,7 +21,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Hashes ✅
 - Methods ✅
 - Debugging ✅
-- Basic Enumerable Methods
+- Basic Enumerable Methods ✅
 - Predicate Enumerable Methods
 - Nested Collections
 
