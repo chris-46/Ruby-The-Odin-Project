@@ -1537,4 +1537,198 @@ invited_friends(friends)
  #=> ["Sharon", "Leo", "Leila", "Arun"]
 
 <h1 align="center"> Predicate Enumerable Methods </h1>
+
+# Brief Overview
+- Predicate Methods
+- #include?
+- #any?
+- #all?
+- #none?
+
+# Predicate Methods
+Just to review, predicate methods are methods that return either **true** or **false**. They can be identified easily as predicate method is indicated by a **question mark (?)** at the end of the method name.
+
+# #include?
+Use the **#include>** method to determine whether a particular **element exists** in an array or a hash.
+
+## Inefficient Example: #each 
+numbers = [5, 6, 7, 8]  
+element = 6  
+result = false  
+ 
+numbers.each do |number|  
+&emsp;if number == element  
+&emsp;&emsp;result = true  
+&emsp;&emsp;break  
+&emsp;end  
+end  
+
+result  
+\# => true
+
+element = 3  
+result = false
+
+numbers.each do |number|  
+&emsp;if number == element  
+&emsp;&emsp;result = true  
+&emsp;&emsp;break  # this break behavior is build in in **#include?**  
+&emsp;end  
+end
+
+result  
+#=> false
+
+## Using #include?
+numbers = [5, 6, 7, 8]
+
+`numbers.include?(6)`  
+#=> true
+
+`numbers.include?(3)`  
+#=> false
+
+## Another #include? example
+
+friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
+
+invited_list = friends.select { |friend| friend != 'Brian' }
+
+`invited_list.include?('Brian')`  
+#=> false
+
+# #any?
+**\#any?** returns true if any elements in your array or hash match the condition within the block; otherwise, it will return false.
+
+## Inefficient Example: #each 
+We want to see if there is any number greater than 500 or less than 20 in an array of numbers
+
+fruits = ["apple", "banana", "strawberry", "pineapple"]  
+matches = []  
+result = false
+
+fruits.each do |fruit|  
+&emsp;if fruit.length > 3  
+&emsp;&emsp;matches.push(fruit)  
+&emsp;end  
+end
+
+result = fruits.length == matches.length  
+result  
+#=> true
+
+fruits = ["apple", "banana", "strawberry", "pineapple"]  
+matches = []  
+result = false
+
+fruits.each do |fruit|  
+&emsp;if fruit.length > 6  
+&emsp;&emsp;matches.push(fruit)  
+&emsp;end  
+end
+
+result = fruits.length == matches.length  
+result  
+#=> false
+
+## #any? Example
+numbers = [21, 42, 303, 499, 550, 811]
+
+`numbers.any? { |number| number > 500 }`  
+#=> true
+
+`numbers.any? { |number| number < 20 }`  
+#=> false
+
+# #all?
+The **#all?** method is also fairly intuitive. It only returns **true** if **all** the **elements** in your array or hash **match the condition** you set within the block; otherwise, it will return false
+
+
+Let’s say that we want to check whether **all the words** in our list **are more than 3 characters or 6 characters long**. First,let’s see how we could achieve this using #each:
+## Inefficient Example: #each 
+fruits = ["apple", "banana", "strawberry", "pineapple"]  
+matches = []  
+result = false  
+
+fruits.each do |fruit|  
+&emsp;if fruit.length > 3  
+&emsp;&emsp;matches.push(fruit)  
+&emsp;end  
+end
+
+result = fruits.length == matches.length  
+result  
+#=> true
+
+fruits = ["apple", "banana", "strawberry", "pineapple"]  
+matches = []  
+result = false  
+
+fruits.each do |fruit|  
+&emsp;if fruit.length > 6  
+&emsp;&emsp;matches.push(fruit)  
+&emsp;end  
+end
+
+result = fruits.length == matches.length  
+result  
+#=> false
+
+## #all? Example
+fruits = ["apple", "banana", "strawberry", "pineapple"]
+
+`fruits.all? { |fruit| fruit.length > 3 }`  
+#=> true
+
+`fruits.all? { |fruit| fruit.length > 6 }`  
+#=> false
+
+
+# #none?
+Conversely, **#none?** returns true only if the condition in the block matches none of the elements in your array or hash; otherwise, it returns false.
+
+Observe this similar example to that in the #all? section
+## Inefficient Example: #each 
+fruits = ["apple", "banana", "strawberry", "pineapple"]  
+result = false
+
+fruits.each do |fruit|  
+&emsp;if fruit.length > 10  
+&emsp;&emsp;result = false  
+&emsp;&emsp;break  
+&emsp;end
+
+&emsp;result = true  
+end
+
+result  
+#=> true
+
+fruits = ["apple", "banana", "strawberry", "pineapple"]  
+result = false
+
+fruits.each do |fruit|  
+&emsp;if fruit.length > 6  
+&emsp;&emsp;result = false  
+&emsp;&emsp;break  
+&emsp;end  
+
+&emsp;result = true  
+end
+
+result  
+#=> false
+
+## #none? Example
+fruits = ["apple", "banana", "strawberry", "pineapple"]
+
+`fruits.none? { |fruit| fruit.length > 10 }`  
+#=> true
+
+`fruits.none? { |fruit| fruit.length > 6 }`  
+#=> false
+
+
+
+
 <h1 align="center"> Nested Collections </h1>

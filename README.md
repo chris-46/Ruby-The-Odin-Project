@@ -22,7 +22,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Methods ✅
 - Debugging ✅
 - Basic Enumerable Methods ✅
-- Predicate Enumerable Methods
+- Predicate Enumerable Methods ✅
 - Nested Collections
 
 ### Basic Ruby Projects
