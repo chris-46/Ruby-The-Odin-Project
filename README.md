@@ -11,7 +11,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Installing Ruby
   - [RubyInstaller](https://rubyinstaller.org/) & Ruby LSP Extension for VSCode   
 
-### Basic Ruby
+### Basic Ruby ✅
 - Basic Data Types ✅
 - Variables ✅
 - Input and Output ✅
@@ -23,7 +23,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Debugging ✅
 - Basic Enumerable Methods ✅
 - Predicate Enumerable Methods ✅
-- Nested Collections
+- Nested Collections ✅
 
 ### Basic Ruby Projects
 - Project: Caesar Cipher

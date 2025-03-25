@@ -1732,3 +1732,282 @@ fruits = ["apple", "banana", "strawberry", "pineapple"]
 
 
 <h1 align="center"> Nested Collections </h1>
+
+# Overview
+- Nested Arrays & Hashes
+  - What data is useful to store in nested arrays & hashes.
+  - Accessing data
+  - **#dig** method
+  - Adding data
+  - Deleting data
+  - Creating an **immutable** nested array
+  - Iterating over nested arrays and hashes
+
+# Nested Arrays
+
+Arrays can contain **any type of data**, including arrays. A nested aray is one that contains other arrays!
+
+Nested arrays are good to store groups of similar data or positional data. Observe the following nested array of test score and teacher mailboxes:
+
+test_scores = [  
+  [97, 76, 79, 93],  
+  [79, 84, 76, 79],  
+  [88, 67, 64, 76],  
+  [94, 55, 67, 81]  
+]  
+
+teacher_mailboxes = [  
+  ["Adams", "Baker", "Clark", "Davis"],  
+  ["Jones", "Lewis", "Lopez", "Moore"],  
+  ["Perez", "Scott", "Smith", "Young"]  
+]  
+
+## Accessing Elements
+
+Access elements by using **myarray[x][y]** where **x** is the index of the nested element and **y** is the index **inside** of the nested element.
+
+teacher_mailboxes[0][0]  
+#=> "Adams"  
+teacher_mailboxes[1][0]  
+#=> "Jones"  
+teacher_mailboxes[2][0]  
+#=> "Perez"  
+
+Negative indices also work to return elements from end of array:  
+teacher_mailboxes[0][-1]  
+#=> "Davis"  
+teacher_mailboxes[-1][0]  
+#=> "Perez"  
+teacher_mailboxes[-1][-2]  
+#=> "Smith"
+
+## NoMethodError & #dig
+Try accessing an index of a **nonexistent nested element**, and a **NoMethodError** will be raised (the **nil** class doesn't have a [] method).
+
+However, like a regular array, trying to access a **nonexistent index** inside of an **existing nested element** will return **Nil**.  
+
+teacher_mailboxes[3][0]  
+#=> NoMethodError  
+teacher_mailboxes[0][4]  
+#=> nil  
+
+Want a **nil** value return when trying to access the index of a **nonexistent nested element**? 
+- Use **#dig**
+
+`teacher_mailboxes.dig(3, 0)`  
+#=> nil  
+`teacher_mailboxes.dig(0, 4)`  
+#=> nil
+
+## Creating a new nested array
+
+Recall that we used **Array.new(3)** or **Array.new(2,7)** before, a method that takes two optional arguments: the array's initial size and default values.
+- According to the [Array class documentation](https://docs.ruby-lang.org/en/3.3/Array.html), the second optional argument for **Array.new** (default value) should only be used with an **immutable** (numbers, boolean values, symbols instead of strings, arrays, hashes).
+  - This is because using mutables would result in confusing behavior since each default value in the array would be a **reference** to the **same default value** &rarr; changing **one** of the elements will change **all** the elements in the array!
+
+To create an **immutable** aray of mutable objects, pass the default value for **Array.new** in a curly braces block. 
+- The code in the block gets **evaluated** for **every slot** in the array, creating multiple objects to initialize the array with, rather than references to the same object.
+
+Observe and contrast:   
+mutable = Array.new(3, Array.new(2))  
+#=> [[nil, nil], [nil, nil], [nil, nil]]  
+mutable[0][0] = 1000  
+#=> 1000  
+mutable  
+#=> [[1000, nil], [1000, nil], [1000, nil]]  
+
+and:  
+`immutable = Array.new(3) { Array.new(2) }`  
+#=> [[nil, nil], [nil, nil], [nil, nil]]  
+immutable[0][0] = 1000  
+#=> 1000    
+immutable  
+#=> [[1000, nil], [nil, nil], [nil, nil]]  
+
+## Adding and Removing Elements
+Use the **#push** method or the shovel operator **<<**. Note that you need to **specify the index of the nested array**.
+
+`test_scores << [100, 99, 98, 97]`  
+#=> [[97, 76, 79, 93], [79, 84, 76, 79], [88, 67, 64, 76], [94, 55, 67, 81], [100, 99, 98, 97]]  
+`test_scores[0].push(100)`  
+#=> [97, 76, 79, 93, 100]  
+test_scores  
+#=> [[97, 76, 79, 93, 100], [79, 84, 76, 79], [88, 67, 64, 76], [94, 55, 67, 81], [100, 99, 98, 97]]  
+
+
+Use the similar syntax to add or remove elements from the entire nested array or from a specific nested element:  
+`test_scores.pop`  
+#=> [100, 99, 98, 97]  
+`test_scores[0].pop`  
+#=> 100  
+test_scores  
+#=> [[97, 76, 79, 93], [79, 84, 76, 79], [88, 67, 64, 76], [94, 55, 67, 81]]
+
+## Iterating over a nested array
+
+Using **#each_with_index**, think of nested arrays as having rows and columns:
+- Each row is the **nested element**, and 
+- Each column is the **index of the nested element**.
+
+`teacher_mailboxes.each_with_index do |row, row_index|`  
+&emsp;puts "Row:#{row_index} = #{row}"  
+end  
+#=> Row:0 = ["Adams", "Baker", "Clark", "Davis"]  
+#=> Row:1 = ["Jones", "Lewis", "Lopez", "Moore"]  
+#=> Row:2 = ["Perez", "Scott", "Smith", "Young"]  
+#=> [["Adams", "Baker", "Clark", "Davis"], ["Jones", "Lewis", "Lopez", "Moore"], ["Perez", "Scott", "Smith", "Young"]]
+
+
+To iterate over **individual elements inside each row**, you need to nest another **enumerable method** inside:    
+
+`teacher_mailboxes.each_with_index do |row, row_index|`  
+&emsp;`row.each_with_index do |teacher, column_index|`  
+&emsp;&emsp;puts "Row:#{row_index} Column:#{column_index} = #{teacher}"  
+&emsp;end  
+end  
+#=> Row:0 Column:0 = Adams  
+#=> Row:0 Column:1 = Baker   
+#=> Row:0 Column:2 = Clark  
+#=> Row:0 Column:3 = Davis  
+#=> Row:1 Column:0 = Jones  
+#=> Row:1 Column:1 = Lewis  
+#=> Row:1 Column:2 = Lopez  
+#=> Row:1 Column:3 = Moore  
+#=> Row:2 Column:0 = Perez  
+#=> Row:2 Column:1 = Scott  
+#=> Row:2 Column:2 = Smith  
+#=> Row:2 Column:3 = Young  
+#=> [["Adams", "Baker", "Clark", "Davis"], ["Jones", "Lewis", "Lopez", "Moore"], ["Perez", "Scott", "Smith", "Young"]]  
+
+Note that it's easier to **#flatten** before iterating if you only need each teacher's name:
+
+`teacher_mailboxes.flatten.each do |teacher|`  
+&emsp;puts "#{teacher} is amazing!"  
+end  
+#=> Adams is amazing!  
+#=> Baker is amazing!  
+#=> Clark is amazing!  
+#=> Davis is amazing!  
+#=> Jones is amazing!  
+#=> Lewis is amazing!  
+#=> Lopez is amazing!  
+#=> Moore is amazing!  
+#=> Perez is amazing!  
+#=> Scott is amazing!  
+#=> Smith is amazing!  
+#=> Young is amazing!  
+#=> ["Adams", "Baker", "Clark", "Davis", "Jones", "Lewis", "Lopez", "Moore", "Perez", "Scott", "Smith", "Young"]
+
+### Nesting two predicate enumerables together
+
+Here, we try to determine if a student scored higher than 80 on everything:
+
+test_scores = [[97, 76, 79, 93], [79, 84, 76, 79], [88, 67, 64, 76], [94, 55, 67, 81]]  
+#=> [[97, 76, 79, 93], [79, 84, 76, 79], [88, 67, 64, 76], [94, 55, 67, 81]]  
+
+`test_scores.any? do |scores|`  
+&emsp;scores.all? { |score| score > 80 }  
+end  
+#=> false
+
+The result is straight forward: We're trying to determine if **any** of the students scored above 80 on **all** their tests &rarr; **false**.
+
+Now if we switch **any** and **all**:
+`test_scores.all? do |scores|`  
+&emsp;scores.any? { |score| score > 80 }  
+end  
+#=> true
+
+The result is now **true** since **all** of the students scored higher than 80 in at least one (and therefore **any**) of their tests.
+
+# Nested hashes
+Like arrays, hashes can be nested, or multidimensional.  
+
+vehicles = {  
+&emsp;alice: {year: 2019, make: "Toyota", model: "Corolla"},  
+&emsp;blake: {year: 2020, make: "Volkswagen", model: "Beetle"},  
+&emsp;caleb: {year: 2020, make: "Honda", model: "Accord"}  
+}
+
+## Accessing data
+Like a nested array, call **hash[:x][:y]**, where **:x** is the **key of the hash** and **:y** is the **key of the nested hash**.
+
+vehicles[:alice][:year]  
+#=> 2019  
+vehicles[:blake][:make]  
+#=> "Volkswagen"  
+vehicles[:caleb][:model]  
+#=> "Accord"
+
+Again, accessing a key in a **nonexistent nested hash** will raise a **NoMethodError**, so use the **#dig** method.
+- As expected, accessing a nonexistent key in an **existing nested hash** will return **nil**.
+
+vehicles[:zoe][:year]  
+#=> NoMethodError  
+`vehicles.dig(:zoe, :year)`  
+#=> nil  
+vehicles[:alice][:color]  
+#=> nil  
+`vehicles.dig(:alice, :color)`  
+#=> nil  
+
+## Adding and removing data
+You can add more nested hashes like a regular hash.
+
+Say Dave bought a new car and wants to add it to the list:
+
+`vehicles[:dave] = {year: 2021, make: "Ford", model: "Escape"}`  
+#=> {:year=>2021, :make=>"Ford", :model=>"Escape"}  
+vehicles  
+#=> {:alice=>{:year=>2019, :make=>"Toyota", :model=>"Corolla"}, :blake=>{:year=>2020, :make=>"Volkswagen", :model=>"Beetle"}, :caleb=>{:year=>2020, :make=>"Honda", :model=>"Accord"}, **:dave=>{:year=>2021, :make=>"Ford", :model=>"Escape"}**}
+
+You can aslo add an element to **one of the nested hashes**.
+
+Say Dave likes his new Escape and think we should keep track of the color of the vehicles. To add a new **key/pair** value to a nested hash, specify the **key of the nested hash** right before naming the new key.
+
+`vehicles[:dave][:color] = "red"`  
+#=> "red"  
+vehicles  
+#=> {:alice=>{:year=>2019, :make=>"Toyota", :model=>"Corolla"}, :blake=>{:year=>2020, :make=>"Volkswagen", :model=>"Beetle"}, :caleb=>{:year=>2020, :make=>"Honda", :model=>"Accord"}, **:dave=>{:year=>2021, :make=>"Ford", :model=>"Escape", :color=>"red"}**}
+
+### Deleting a nested hash and key/value pairs in nested hashes
+
+Say Blake has decided to sell his Beetle (apparently to backpack across Europe):  
+`vehicles.delete(:blake)`  
+#=> {:year=>2020, :make=>"Volkswagen", :model=>"Beetle"}  
+vehicles  
+#=> {:alice=>{:year=>2019, :make=>"Toyota", :model=>"Corolla"}, :caleb=>{:year=>2020, :make=>"Honda", :model=>"Accord"}, :dave=>{:year=>2021, :make=>"Ford", :model=>"Escape", :color=>"red"}}
+
+To delete one of the **key/value pairs inside a nested hash**, specify the key of the hash:
+- Imagine Dave decided he doesn't care about the color of his vehicle anymore:  
+
+`vehicles[:dave].delete(:color)`  
+#=> "red"  
+vehicles  
+#=> {:alice=>{:year=>2019, :make=>"Toyota", :model=>"Corolla"}, :caleb=>{:year=>2020, :make=>"Honda", :model=>"Accord"}, **:dave=>{:year=>2021, :make=>"Ford", :model=>"Escape"}**}
+
+## Methods
+Moral of the story: look through the documentation and mess with the IRB!
+
+Let’s look at an example using the **vehicles nested hash**. Let’s say that we want to know who owns **vehicles that are from 2020 or newer**. At first glance in the documentation, it looks like **#select** would be a great method to use.
+
+`vehicles.select { |name, data| data[:year] >= 2020 }`  
+#=> {:caleb=>{:year=>2020, :make=>"Honda", :model=>"Accord"}, :dave=>{:year=>2021, :make=>"Ford", :model=>"Escape"}}
+
+Yes, using **#select** gives us the information that we need. However, what if we on**ly want the names of the owners** and not another nested hash. Let’s keep looking through the documentation to see what else we find. The **#collect** method sounds very useful for this situation. Let’s collect the names if the year is 2020 or newer.
+
+`vehicles.collect { |name, data| name if data[:year] >= 2020 }`  
+#=> [nil, :caleb, :dave]
+
+Using **#collect** gets us a lot closer to **only having the names** of the new vehicle owners. If you look at this method in the documentation you will see that **#collect and #map** have the **same functionality**. Both of these methods use the **return value of each iteration**, so when the **if statement is false**, it will return a **nil value**.
+
+Nil values can cause problems down the road, so let’s look through the documentation to see if we can find a method to help solve this problem. The **#compact** method **returns an array (or hash) without nil values**, so let’s chain it on the end of the block.
+
+`vehicles.collect { |name, data| name if data[:year] >= 2020 }.compact`  
+#=> [:caleb, :dave]
+
+Yes, using **#collect and #compact** returns the data that we want. As you can see, chaining methods can be very useful. However, if we continue exploring the documentation, we will find another method that combines the functionality of these two methods. **Ruby version 2.7** added a new enumerable method called **#filter_map** that sounds very useful for this situation.
+
+`vehicles.filter_map { |name, data| name if data[:year] >= 2020 }`  
+#=> [:caleb, :dave]
+Amazing! We have found a great solution to returning an array that only contains the names of the owners of vehicles from 2020 or newer! Plus, we got experience using other methods that you will probably use in the future. We have found some really useful methods by exploring the documentation when we have a specific use case in mind.
