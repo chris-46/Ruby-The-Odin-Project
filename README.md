@@ -26,7 +26,8 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Nested Collections ✅
 
 ### Basic Ruby Projects
-- Project: Caesar Cipher
+- Project: Caesar Cipher ✅
+  - A quick example that utilizes the if-else control structure, loops using #each, and various string/char quirks.
 - Project: Sub Strings
 - Project: Stock Picker
 - Project: Bubble Sort
