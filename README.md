@@ -27,8 +27,9 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 
 ### Basic Ruby Projects
 - Project: Caesar Cipher ✅
-  - A quick example that utilizes the if-else control structure, loops using #each, and various string/char quirks.
-- Project: Sub Strings
+  - A quick example that utilizes the if-else control structure, loops using **#each**, and various string/char quirks.
+- Project: Sub Strings ✅
+  - A cool little program that utilizes **#scan** method, looking for substring matches using the dictionary words as regex patterns.
 - Project: Stock Picker
 - Project: Bubble Sort
 
