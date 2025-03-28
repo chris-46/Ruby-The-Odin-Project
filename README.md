@@ -30,7 +30,8 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
   - A quick example that utilizes the if-else control structure, loops using **#each**, and various string/char quirks.
 - Project: Sub Strings ✅
   - A cool little program that utilizes **#scan** method, looking for substring matches using the dictionary words as regex patterns.
-- Project: Stock Picker
+- Project: Stock Picker ✅
+  - Learned max_by, finding a each_with_index, and mapping the heck out of the problem! :)
 - Project: Bubble Sort
 
 ### Object Oriented Programming Basics
