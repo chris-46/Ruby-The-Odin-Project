@@ -32,7 +32,8 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
   - A cool little program that utilizes **#scan** method, looking for substring matches using the dictionary words as regex patterns.
 - Project: Stock Picker ✅
   - Learned max_by, finding a each_with_index, and mapping the heck out of the problem! :)
-- Project: Bubble Sort
+- Project: Bubble Sort ✅
+  - Back to 1st year CS with Bubble Sort, but trying the **#times** method and a fancy swapping trick!
 
 ### Object Oriented Programming Basics
 - Object Oriented Programming
