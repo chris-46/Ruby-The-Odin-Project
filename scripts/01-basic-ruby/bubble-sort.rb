@@ -24,3 +24,16 @@ class BubbleSort
   end
 
 end
+
+# Example runs:
+# irb(main):003> bs=BubbleSort.new
+# => #<BubbleSort:0x00000165a515dfe0>
+# irb(main):004> bs.bubble_sort([4,3,78,2,0,2])
+# => [0, 2, 2, 3, 4, 78]
+# irb(main):005> bs.bubble_sort([4,3,78,2,0,2])
+# => [0, 2, 2, 3, 4, 78]
+# irb(main):006> bs.bubble_sort([5,23,7,34,21,4])
+# => [4, 5, 7, 21, 23, 34]
+# irb(main):007> bs.bubble_sort([4,3,78,21,234,30,2,2342])
+# => [2, 3, 4, 21, 30, 78, 234, 2342]
+# irb(main):008> exit
