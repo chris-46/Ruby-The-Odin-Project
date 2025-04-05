@@ -37,6 +37,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 
 ### Object Oriented Programming Basics
 - Object Oriented Programming
+  - [Launch Schools's Ruby OOP Book](https://launchschool.com/books/oo_ruby/read/introduction)
 - Project Management
 - Linting and RuboCop
 - Project: Tic Tac Toe
