@@ -25,7 +25,7 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Predicate Enumerable Methods ✅
 - Nested Collections ✅
 
-### Basic Ruby Projects
+### Basic Ruby Projects ✅
 - Project: Caesar Cipher ✅
   - A quick example that utilizes the if-else control structure, loops using **#each**, and various string/char quirks.
 - Project: Sub Strings ✅
@@ -35,9 +35,38 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
 - Project: Bubble Sort ✅
   - Back to 1st year CS with Bubble Sort, but trying the **#times** method and a fancy swapping trick!
 
-### Object Oriented Programming Basics
-- Object Oriented Programming
-  - [Launch Schools's Ruby OOP Book](https://launchschool.com/books/oo_ruby/read/introduction)
+### Object Oriented Programming
+- Object Oriented Programming: [Launch Schools's Ruby OOP Book](https://launchschool.com/books/oo_ruby/read/introduction)
+  - The Object Model ✅
+    - Why OOP? ✅
+    - What are Objects? ✅
+    - Classes Define Objects ✅
+    - Modules ✅
+    - Method Lookup ✅
+    - Summary ✅
+  - Classes and Objects I
+    - States and Behaviors
+    - Initializing a new Object
+    - Instance Variables
+    - Instance Methods
+    - Accessor Methods
+  - Classes and Objects II
+    - Class Methods
+    - Class Variables
+    - Constants 
+    - The to_s Methods
+    - More about self
+    - Summary 
+  - Inheritance
+    - Class Inheritance
+    - super
+    - Mixing in Modules
+    - Inheritance vs Modules
+    - Method Lookup Path
+    - More Modules
+    - Private, Protected, and Public
+    - Accidental Method Overriding
+    - Summary
 - Project Management
 - Linting and RuboCop
 - Project: Tic Tac Toe

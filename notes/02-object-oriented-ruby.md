@@ -48,7 +48,7 @@ end
 my_obj = MyClass.new
 
 
-# What are Objects?
+## What are Objects?
 In Ruby, everything is an object &rarr; Not exactly true!
 - Anything that can be said to have a value **is** an object: that includes numbers, arrays, strings, and even classes and modules.
 - However, **methods, blocks, and variables** stand out.
@@ -63,7 +63,7 @@ irb :001 > "hello".class
 irb :002 > "world".class  
 => String  
 
-# Classes Define Objects
+## Classes Define Objects
 Ruby defines the attributes and behaviors of its objects in classes. You can think of classes as **basic outlines** of what an object should be **made of** and what it should be able to **do**. 
 
 To **define** a class, we use syntax similar to defining a method. 
@@ -88,4 +88,74 @@ The terminology in OOP is something you'll eventually get used to, but the impor
 
 As you can see, defining and creating a new instance of a basic class is simple. But before we go any further showing you how to create more elaborate classes, let's talk about modules briefly.
 
-# Modules
+## Modules
+Modules are another way to achieve polymorphism, describing a **collection** of behaviors that is usable in other classes via **mixins**.
+- Use the **include** method invocation to mixin a module into a class.
+
+Let's say we wanted our `GoodDog` class to have a speak method but we have other classes that we want to use a speak method with too. Here's how we'd do it.
+
+`module Speak`  
+&emsp;def speak(sound)  
+&emsp;&emsp;puts sound  
+&emsp;end  
+`end`  
+
+class GoodDog  
+&emsp;`include Speak`  
+end  
+
+class HumanBeing  
+&emsp;`include Speak`  
+end  
+
+sparky = GoodDog.new  
+sparky.speak("Arf!")        # => Arf!  
+bob = HumanBeing.new  
+bob.speak("Hello!")         # => Hello!  
+
+Note: 
+- `sparky`, the GoodDog object, and `bob`, the HumanBeing object, both have access to the speak instance method. 
+- "mixing in" the module Speak makes it as if we copy-pasted the speak method into the GoodDog and HumanBeing classes.
+
+## Method Lookup
+When you call a method, how does Ruby know where to look for that method? Ruby has a distinct lookup path that it follows each time a method is called. Let's use our program from above to see what the method lookup path is for our GoodDog class. We can use the ancestors method on any class to find out the method lookup chain.
+
+Copy Code
+module Speak
+  def speak(sound)
+    puts "#{sound}"
+  end
+end
+
+class GoodDog
+  include Speak
+end
+
+class HumanBeing
+  include Speak
+end
+
+puts "---GoodDog ancestors---"
+puts GoodDog.ancestors
+puts ''
+puts "---HumanBeing ancestors---"
+puts HumanBeing.ancestors
+The output looks like this:
+
+Copy Code
+---GoodDog ancestors---
+GoodDog
+Speak
+Object
+Kernel
+BasicObject
+
+---HumanBeing ancestors---
+HumanBeing
+Speak
+Object
+Kernel
+BasicObject
+The Speak module is placed right in between our custom classes (i.e., GoodDog and HumanBeing) and the Object class that comes with Ruby. In Inheritance you'll see how the method lookup chain works when working with both mixins and class inheritance.
+
+This means that since the speak method is not defined in the GoodDog class, the next place it looks is the Speak module. This continues in an ordered, linear fashion, until the method is either found, or there are no more places to look.
