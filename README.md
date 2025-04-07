@@ -1,4 +1,4 @@
-# Ruby: Odin and Beyond! 💎 🥒 **Se**
+# Ruby: Odin and Beyond! 💎 🥒 \[**Se**\]
 I'm learning Ruby, the language designed specifically for programmer happiness! 
 
 I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby), with the goal being having a good understanding of the fundamentals on implementing things in Ruby. 
