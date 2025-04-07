@@ -1,9 +1,10 @@
-# Ruby-The-Odin-Project
-
+# Ruby: Odin and Beyond! 💎 🥒 **Se**
 I'm learning Ruby, the language designed specifically for programmer happiness! 
 
 I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby), with the goal being having a good understanding of the fundamentals on implementing things in Ruby. 
 - In particular, I will be rewriting and summarizing the notes, trying out examples and concepts on the **irb**, and working through several of the **relevant projects** in each section.
+
+  Following The Odin Project, I will work on projects involving **Cucumber** and **Selenium** for a comprehensive tour of Ruby's development and validation capabilities.
 
 ## Course Outline
 ### Introduction ✅
