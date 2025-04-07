@@ -1,35 +1,35 @@
-<h1 align="center"> [Object Oriented Ruby] </h1>
+<h1 align="center"> The Object Model </h1>
 
+- This first section will be an introduction to OOP in Ruby, particularly why we should use OOP and important concepts in OOP.
 - [Source Link](https://launchschool.com/books/oo_ruby/read/the_object_model#whyobjectorientedprogramming)
-# Introduction - Why OOP and Important Concepts in OOP
 
-## Object Oriented Programming
+# Object Oriented Programming
 Object Oriented Programming (OOP) is a programming [paradigm](https://en.wikipedia.org/wiki/Paradigm) that was created to deal with the growing complexity of large software systems.
 - As applications grew in complexity and size, they became very difficult to maintain. 
 - In OOP, areas of code that performed certain procedures are section off so that their programs could become the **interaction of many small parts**, as opposed to one massive blob of dependency.
   - As such, one small change at any point in the program would not trigger a ripple effect of errors due to dependencies throughout the entire program. 
 
-## Encapsulation
+# Encapsulation
 Encapsulation describes the idea of bundling or combining the **states (data) and behaviors (operations)** that work together on that data into a **single entity**, e.g. an object.
 
 Encapsulation also entails hiding functionality to make it unavailable to the rest of the codebase.
 - Data protection is the main goal here, only with obvious intent can that data be manipulated.
 - In Ruby, like other OO languages, achieves this by **creating objects** and **exposing public interfaces** (i.e. methods) to interact with those objects.
 
-### Example: A Simple Banking Application
+## Example: A Simple Banking Application
 - The code for the app, at a minimum, must contain **data** about the bank accounts (account number, balance, account type) and the users (name, address, phone number). 
 - The code must also contain **behaviors or operations** that use and manipulate that data. For instance, we should have operations that open an account, make withdrawals, and deposit new funds.
 - One thing is evident here: the **data and operations** that you perform on your data are **related**.
   - You don't want to apply an operation intended for a bank account on a user's data. For example, it doesn't make much sense to withdraw funds from a user. Instead, you want to withdraw funds from the account, so you want to operate on an account.
 
 
-## Polymorphism
+# Polymorphism
 Polymorphism is the ability for **different types of data** to respond to a **common interface**. 
 - For instance, if we have a **method** that invokes the **move method** on its **argument**, we can pass the method **any type of argument** as long as the argument has a **compatible** move method. The object might represent a human, a cat, a jellyfish, or, conceivably, even a car or train. That is, it lets objects of different types respond to the same method invocation.
 
 **"Poly"** stands for **"many"** and **"morph"** stands for **"forms"**. OOP gives us flexibility in using **pre-written code for new purposes**.
 
-## Inheritance
+# Inheritance
 The concept of inheritance is used in Ruby where **a class inherits** -- that is, acquires -- the **behaviors of another class**, referred to as the **superclass**. 
 - Define basic classes with **large reusability** and smaller subclasses for more **fine-grained, detailed** behaviors.
 
@@ -48,7 +48,7 @@ end
 my_obj = MyClass.new
 
 
-## What are Objects?
+# What are Objects?
 In Ruby, everything is an object &rarr; Not exactly true!
 - Anything that can be said to have a value **is** an object: that includes numbers, arrays, strings, and even classes and modules.
 - However, **methods, blocks, and variables** stand out.
@@ -63,7 +63,7 @@ irb :001 > "hello".class
 irb :002 > "world".class  
 => String  
 
-## Classes Define Objects
+# Classes Define Objects
 Ruby defines the attributes and behaviors of its objects in classes. You can think of classes as **basic outlines** of what an object should be **made of** and what it should be able to **do**. 
 
 To **define** a class, we use syntax similar to defining a method. 
@@ -88,7 +88,7 @@ The terminology in OOP is something you'll eventually get used to, but the impor
 
 As you can see, defining and creating a new instance of a basic class is simple. But before we go any further showing you how to create more elaborate classes, let's talk about modules briefly.
 
-## Modules
+# Modules
 Modules are another way to achieve polymorphism, describing a **collection** of behaviors that is usable in other classes via **mixins**.
 - Use the **include** method invocation to mixin a module into a class.
 
@@ -117,45 +117,77 @@ Note:
 - `sparky`, the GoodDog object, and `bob`, the HumanBeing object, both have access to the speak instance method. 
 - "mixing in" the module Speak makes it as if we copy-pasted the speak method into the GoodDog and HumanBeing classes.
 
-## Method Lookup
-When you call a method, how does Ruby know where to look for that method? Ruby has a distinct lookup path that it follows each time a method is called. Let's use our program from above to see what the method lookup path is for our GoodDog class. We can use the ancestors method on any class to find out the method lookup chain.
+# Method Lookup
+When you call a method, how does Ruby know where to look for that method? 
+Ruby has a **distinct lookup path** that it follows each time a method is called. 
 
-Copy Code
-module Speak
-  def speak(sound)
-    puts "#{sound}"
-  end
-end
+Let's use our program from above to see what the method lookup path is for our GoodDog class. We can use the ancestors method on any class to find out the method lookup chain.
 
-class GoodDog
-  include Speak
-end
+module Speak  
+&emsp;def speak(sound)  
+&emsp;&emsp;puts "#{sound}"  
+&emsp;end  
+end  
 
-class HumanBeing
-  include Speak
-end
+class GoodDog  
+&emsp;include Speak  
+end  
 
-puts "---GoodDog ancestors---"
-puts GoodDog.ancestors
-puts ''
-puts "---HumanBeing ancestors---"
-puts HumanBeing.ancestors
-The output looks like this:
+class HumanBeing  
+&emsp;include Speak  
+end  
 
-Copy Code
----GoodDog ancestors---
-GoodDog
-Speak
-Object
-Kernel
-BasicObject
+puts "---GoodDog ancestors---"  
+puts GoodDog.ancestors  
+puts ''  
+puts "---HumanBeing ancestors---"  
+puts HumanBeing.ancestors  
 
----HumanBeing ancestors---
-HumanBeing
-Speak
-Object
-Kernel
-BasicObject
-The Speak module is placed right in between our custom classes (i.e., GoodDog and HumanBeing) and the Object class that comes with Ruby. In Inheritance you'll see how the method lookup chain works when working with both mixins and class inheritance.
+**The output looks like this:**  
 
-This means that since the speak method is not defined in the GoodDog class, the next place it looks is the Speak module. This continues in an ordered, linear fashion, until the method is either found, or there are no more places to look.
+---GoodDog ancestors---  
+GoodDog  
+Speak  
+**Object**  
+**Kernel**  
+**BasicObject**  
+
+---HumanBeing ancestors---  
+HumanBeing  
+Speak  
+**Object**  
+**Kernel**  
+**BasicObject**  
+
+The **Speak** module is placed right in **between our custom classes** (i.e., GoodDog and HumanBeing) and the **Object class** that comes with Ruby. 
+- In **Inheritance** you'll see how the **method lookup chain works** when working with both **mixins** and **class inheritance**.
+
+Since the **speak** method is not defined in the GoodDog class, the next place it looks is the **Speak** module. This continues in an **ordered, linear fashion,**  until the method is either **found**, or there are **no more places to look.**
+
+<h1 align="center"> Classes and Objects - Part I </h1>
+
+# States and Behaviors
+# Initializing a new Object
+# Instance Variables
+# Instance Methods
+# Accessor Methods
+
+<h1 align="center">  Classes and Objects II </h1>
+
+# Class Methods
+# Class Variables
+# Constants 
+# The to_s Methods
+# More about self
+# Summary 
+<h1 align="center">  Inheritance </h1>
+
+# Class Inheritance
+# super
+# Mixing in Modules
+# Inheritance vs Modules
+# Method Lookup Path
+# More Modules
+# Private, Protected, and Public
+# Accidental Method Overriding
+# Summary
