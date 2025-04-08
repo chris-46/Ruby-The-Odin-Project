@@ -45,12 +45,13 @@ I will be doing most of [The Odin Project's Ruby Course](https://www.theodinproj
     - Modules ✅
     - Method Lookup ✅
     - Summary ✅
-  - Classes and Objects I
-    - States and Behaviors
-    - Initializing a new Object
-    - Instance Variables
-    - Instance Methods
-    - Accessor Methods
+  - Classes and Objects I ✅
+    - States and Behaviors ✅
+    - Initializing a new Object ✅
+    - Instance Variables ✅
+    - Instance Methods ✅
+    - Accessor Methods ✅
+    - Exercises: MyCar ✅
   - Classes and Objects II
     - Class Methods
     - Class Variables

@@ -23,6 +23,8 @@ module SprayPaint
 end
 
 class MyCar
+  include SprayPaint
+
   attr_accessor :color
   attr_reader :year, :model, :current_speed, :engine_state
   
@@ -30,22 +32,16 @@ class MyCar
     @year = y
     @model = m
     @color = c
-  end
-
-  def current_speed
-    @current_speed || 0
-  end
-
-  def engine_state
-    @engine_state || 'off'
+    @current_speed = 0
+    @engine_state = 'off'
   end
 
   def speed_up(increase_by)
-    current_speed = current_speed + increase_by
+    @current_speed = current_speed + increase_by
   end
 
   def brake(decrease_by)
-    current_speed = current_speed - increase_by
+    @current_speed = current_speed - decrease_by
   end
 
   def start_engine
@@ -57,3 +53,35 @@ class MyCar
   end
 
 end
+
+# Results:
+# irb(main):001> load "./classes_and_objects_I.rb"
+# => true
+# irb(main):002> d = MyCar.new(2020,"VW Golf GTI", "Black")
+# => #<MyCar:0x000001be94949bf8 @color="Black", @current_speed=0, @engine_state="off", @model="VW Golf GTI", @year=2020>
+# irb(main):003> d.year
+# => 2020
+# irb(main):004> d.model
+# => "VW Golf GTI"
+# irb(main):005> d.color
+# => "Black"
+# irb(main):006> d.engine_state
+# => "off"
+# irb(main):007> d.current_speed
+# => 0
+# irb(main):008> d.start_engine
+# => "on"
+# irb(main):009> d.engine_state
+# => "on"
+# irb(main):010> d.speed_up(50)
+# => 50
+# irb(main):011> d.current_speed
+# => 50
+# irb(main):012> d.brake(20)
+# => 30
+# irb(main):013> d.current_speed
+# => 30
+# irb(main):014> d.spray_paint("Candy Purple")
+# => "Candy Purple"
+# irb(main):015> d.color
+# => "Candy Purple"
