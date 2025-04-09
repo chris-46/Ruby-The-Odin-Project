@@ -638,9 +638,86 @@ While this works, the general rule from the Ruby style guide is to
 <h1 align="center">  Classes and Objects II </h1>
 
 # Class Methods
+All the methods we've created have been instance methods: methods that pertain to an **instance or object** of the class. 
+
+**Level methods**, also called **class methods**, are methods we can call **directly on the class** itself, **without having to instantiate** any objects. 
+
+When defining a **class method**, we **prepend** the method name with the reserved word `self.`, 
+like this:
+
+\# ... rest of code ommitted for brevity
+
+def `self.what_am_i`         # Class method definition  
+&emsp;"I'm a GoodDog class!  
+end  
+
+When calling the class method what_am_i:  
+`GoodDog.what_am_i`          # => I'm a GoodDog class!
+
+Class methods are where we put functionality that does not pertain to individual objects.
+- Particularly, if a method does not need to deal with an object's states, a class method is more appropriate.
+
 # Class Variables
+As instance variables capture information specific to instances of a class, variables for an entire class are appropriately named **class variables**.
+- Class variables are created using two @ symbols: `@@class_var_name`
+
+Let's create a **class variable** and a **class method** to view that variable.
+
+class GoodDog  
+&emsp;`@@number_of_dogs = 0`  
+
+&emsp;def initialize  
+&emsp;&emsp;`@@number_of_dogs += 1`  
+&emsp;end  
+
+&emsp;def `self.total_number_of_dogs`  
+&emsp;&emsp;`@@number_of_dogs`  
+&emsp;end  
+end  
+
+puts GoodDog.total_number_of_dogs   # => 0  
+
+dog1 = GoodDog.new  
+dog2 = GoodDog.new  
+
+puts GoodDog.total_number_of_dogs   # => 2  
+
+
+The **class variable** `@@number_of_dogs` is initialized to 0.
+- Our constructor (the initialize method called when an object is instantiated with the new keyword), increments that number by 1. 
+- This also demonstrates that we can **access class variables** from **within** an **instance method** (initialize is an instance method). 
+- Finally, we just return the value of the class variable in the class method `self.total_number_of_dogs`.
+
+ This example uses a **class variable** and a **class method** to keep track of a **class level detail** that pertains only to the **class, and not to individual objects.**
+
 # Constants 
-# The to_s Methods
+Pretty simple: variables that you never want to change remain constant, and are named as such.
+- Infitting with the naming conventions of a constant, a constant in Ruby is defined by using an **upper case letter** at the beginning of the variable name.
+- Most Rubyists will tend to capitalize the entire word as is convention anyways.
+
+class GoodDog  
+&emsp;`DOG_YEARS = 7`  
+  
+&emsp;attr_accessor :name, :age  
+  
+&emsp;def initialize(n, a)  
+&emsp;&emsp;self.name = n  
+&emsp;&emsp;self.age  = a * `DOG_YEARS`  
+&emsp;end  
+end  
+  
+sparky = GoodDog.new("Sparky", 4)  
+puts sparky.age             # => 28  
+
+Here we used the constant `DOG_YEARS` to calculate the age in dog years when we created the object, sparky. 
+- Note that we used the setter methods in the initialize method to initialize the **@name and @age instance variables** given to us by the **attr_accessor** method.
+- We then used the age getter method to retrieve the value from the object.  
+
+
+`DOG_YEARS` is a variable that will **never change for any reason** so we use a constant. 
+- It is **possible to reassign a new value** to constants but **Ruby will throw a warning**.
+# The to_s Method
+
 # More about self
 # Summary 
 # Exercises 
