@@ -925,8 +925,159 @@ In this chapter we covered...
 
 <h1 align="center">  Inheritance </h1>
 
+`Inheritance` is when a **(sub)class** inherits behaviors from a **(super)class**.
+- Common, shared behaviors between classes &rarr; move it to **superclass**!
+
 # Class Inheritance
+Here, we're extracting the speak method from the **GoodDog** class to the `superclass` **Animal**, and we use **inheritance** to make that behavior available to **GoodDog** and **Cat** classes.
+
+class `Animal`  
+&emsp;def speak  
+&emsp;&emsp;"Hello!"  
+&emsp;end  
+end  
+
+class GoodDog `<` Animal  
+end  
+
+class Cat `<` Animal  
+end  
+
+sparky = GoodDog.new  
+paws = Cat.new  
+puts sparky.speak           # => Hello!  
+puts paws.speak             # => Hello!  
+
+We use the `< symbol` to signify that the **GoodDog** class is inheriting from the **Animal** class. 
+- **All** of the **methods** in the **Animal** class are available to the **GoodDog** class for use. 
+- The new class called **Cat** that inherits from **Animal** as well. We've eliminated the speak method from the GoodDog class in order to use the speak method from Animal.  
+- When we run this code we see the correct output. Both classes are now using the superclass Animal's speak method.  
+
+But what if we want to use the original speak method from the GoodDog class only. Let's add it back and see what happens.  
+
+class Animal  
+&emsp;def `speak`  
+&emsp;&emsp;"Hello!"  
+&emsp;end  
+end  
+
+class GoodDog `<` Animal  
+&emsp;attr_accessor :name  
+
+&emsp;def initialize(n)  
+&emsp;&emsp;self.name = n  
+&emsp;end  
+
+&emsp;def `speak`  
+&emsp;&emsp;"#{self.name} says arf!"  
+&emsp;end  
+end  
+
+class Cat < Animal  
+end  
+
+sparky = GoodDog.new("Sparky")  
+paws = Cat.new  
+
+puts sparky.speak           # => **Sparky says arf!**  
+puts paws.speak             # => Hello!  
+
+In the **GoodDog** class, we're `overriding` the **speak** method in the Animal class because Ruby **checks the object's class first** for the method before it looks in the superclass. 
+- That means when we wrote the code `sparky.speak`, it first looked at **sparky's class**, which is **GoodDog**. It found the speak method there and used it.
+- When we wrote the code `paws.speak`, Ruby first looked at **paws's class**, which is **Cat**. It did not find a speak method there, so it continued to look in Cat's **superclass**, Animal. It found a speak method in Animal, and used it. 
+
+`Inheritance` can be a great way to **remove duplication** in your code base. 
+- "**DRY**": "Don't Repeat Yourself" &rarr; If you find yourself writing the same logic over and over again in your programs, there are ways to extract that logic to one place for reuse.
+
 # super
+
+Ruby provides us with the `super` keyword to call methods **earlier** in the **method lookup path**. 
+- When you call `super` from **within a method**, it searches the **method lookup path** for a method with the **same name**, then invokes it. 
+
+Let's see a quick example of how this works:
+
+
+class Animal  
+&emsp;def speak  
+&emsp;&emsp;"Hello!"  
+&emsp;end  
+end  
+
+class GoodDog `<` Animal  
+&emsp;def speak  
+&emsp;&emsp;`super` + " from GoodDog class"  
+&emsp;end  
+end  
+
+sparky = GoodDog.new  
+sparky.speak        # => "Hello! from GoodDog class"  
+
+In the above example, 
+- We've created a simple **Animal** class with a **speak** instance method. 
+- We then created **GoodDog** which **subclasses Animal** also with a **speak** instance method to **override the inherited version**. 
+- However, in the **subclass' speak** method we use `super` to invoke the **speak** method from the **superclass, Animal**, and then we extend the functionality by appending some text to the return value.  
+
+Another more common way of using super is with `initialize`. Let's see an illustration of that:  
+
+
+class Animal  
+&emsp;attr_accessor :name  
+
+&emsp;def `initialize`(name)  
+&emsp;&emsp;@name = name  
+&emsp;end  
+end  
+
+class GoodDog `<` Animal  
+&emsp;def `initialize`(color)  
+&emsp;&emsp;`super`  
+&emsp;&emsp;@color = color  
+&emsp;end  
+end  
+
+bruno = GoodDog.new("brown")        # => `#<GoodDog:0x007fb40b1e6718 @color="brown", @name="brown">`  
+
+The interesting concept we want to explain is the use of `super` in the **GoodDog class**.
+- In this example, we're using `super` with **no arguments**. However, the `initialize` method, where `super` is being used, takes an argument and adds a new twist to how super is invoked. 
+- Here, in addition to the default behavior, `super` **automatically forwards the arguments** that were passed to the method from which `super` is called (initialize method in GoodDog class). 
+- At this point, `super` will **pass** the **color** argument in the initialize defined in the subclass to that of the **Animal superclass** and **invoke** it. 
+- That explains the presence of **@name="brown"** when the bruno instance is created. 
+- Finally, the subclass' `initialize` continues to **set the @color** instance variable.  
+
+When called with **specific arguments**, eg. super(a, b), the **specified arguments** will be sent up the **method lookup chain**. Let's see a quick example:  
+
+
+class BadDog `<` Animal  
+&emsp;def initialize(age, name)  
+&emsp;&emsp;`super(name)`  
+&emsp;&emsp;@age = age  
+&emsp;end  
+end  
+
+BadDog.new(2, "bear")        # => `#<BadDog:0x007fb40b2beb68 @age=2, @name="bear">`  
+
+This is similar to our previous example, with the difference being that `super` takes an argument, hence the **passed in argument is sent** to the superclass. 
+- Consequently, in this example when a BadDog object is created, the passed in name argument ("bear") is passed to the superclass and **set to the @name** instance variable.  
+
+There's one last twist. If you call `super()` exactly as shown -- `with parentheses` -- it calls the **method in the superclass with no arguments** at all. 
+- If you have a **method** in your **superclass** that takes **no arguments**, this is the **safest** -- and **sometimes the only** -- way to call it:  
+
+
+class Animal  
+&emsp;def `initialize`  
+&emsp;end  
+end  
+
+class Bear < Animal  
+&emsp;def initialize(color)  
+&emsp;&emsp;`super()`  
+&emsp;&emsp;@color = color  
+&emsp;end  
+end  
+
+bear = Bear.new("black")        # => `#<Bear:0x007fb40b1e6718 @color="black">`  
+If you forget to use the parentheses here, Ruby will raise an `ArgumentError` exception since the **number of arguments is incorrect**.  
+
 # Mixing in Modules
 # Inheritance vs Modules
 # Method Lookup Path

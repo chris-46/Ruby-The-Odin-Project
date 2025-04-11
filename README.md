@@ -61,9 +61,9 @@ Following The Odin Project, I will work on projects involving **Cucumber** and *
     - Summary  ✅
     - Exercises: More on MyCar ✅
 
-  - Inheritance
-    - Class Inheritance
-    - super
+  - Inheritance 
+    - Class Inheritance ✅
+    - super ✅
     - Mixing in Modules
     - Inheritance vs Modules
     - Method Lookup Path
