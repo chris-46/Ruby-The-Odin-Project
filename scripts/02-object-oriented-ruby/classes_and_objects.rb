@@ -52,6 +52,14 @@ class MyCar
     @engine_state = 'off'
   end
 
+  def self.gas_mileage(gallons, miles)
+    puts "#{miles / gallons} miles per gallon of gas"
+  end
+
+  def to_s
+    "My car is a #{color}, #{year}, #{@model}!"
+  end
+
 end
 
 # Results:
@@ -85,3 +93,22 @@ end
 # => "Candy Purple"
 # irb(main):015> d.color
 # => "Candy Purple"
+
+
+# Classes and Objects II Q3
+# class Person
+#   attr_reader :name
+#   def initialize(name)
+#     @name = name
+#   end
+# end
+
+# bob = Person.new("Steve")
+# bob.name = "Bob"
+
+# ERROR:
+# test.rb:9:in `<main>': undefined method `name=' for
+  #<Person:0x007fef41838a28 @name="Steve"> (NoMethodError)
+  
+# line 107 is a no method error since @name the instance variable is read-only and has no getter defined via attr_reader.
+# Change to attr_writer or attr_accessor to fix.

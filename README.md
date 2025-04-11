@@ -52,13 +52,15 @@ Following The Odin Project, I will work on projects involving **Cucumber** and *
     - Instance Methods ✅
     - Accessor Methods ✅
     - Exercises: MyCar ✅
-  - Classes and Objects II
-    - Class Methods
-    - Class Variables
-    - Constants 
-    - The to_s Methods
-    - More about self
-    - Summary 
+  - Classes and Objects II ✅
+    - Class Methods ✅
+    - Class Variables ✅
+    - Constants  ✅
+    - The to_s Methods ✅
+    - More about self ✅
+    - Summary  ✅
+    - Exercises: More on MyCar ✅
+
   - Inheritance
     - Class Inheritance
     - super
