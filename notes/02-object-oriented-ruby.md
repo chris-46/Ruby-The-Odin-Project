@@ -1525,7 +1525,7 @@ That said, one Object instance method that's **easily overridden without any maj
 
 Overall, it’s important to **familiarize yourself** with some of the **common Object methods** and make sure to **not accidentally override** them as this can have devastating consequences for your application.  
 
-<h1 align="center">📁 Project Management </h1>
+<h1 align="center"> Project Management </h1>
 
   This lesson introduces how to **organize Ruby projects** in a clean, maintainable way that makes collaboration and scaling easier.
 
@@ -1755,3 +1755,5 @@ Once RuboCop is added to the `Gemfile`, the **Ruby LSP extension** will:
 - Validate code
 - Provide formatting/linting via RuboCop
 - Offer intelligent autocompletion and more
+
+<h1 align="center"> Linting and RuboCop </h1>
