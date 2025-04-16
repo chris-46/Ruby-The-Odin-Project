@@ -1,24 +1,11 @@
 # > Classes and Objects I
-# Create a class called MyCar. 
-# - When you initialize a new instance or object of the class, allow the user to define some instance variables that tell us the year, color, and model of the car. 
-# - Create an instance variable that is set to 0 during instantiation of the object to track the current speed of the car as well. 
-# - Create instance methods that allow the car to speed up, brake, and shut the car off.
-
-# Add an accessor method to your MyCar class to change and view the color of your car. 
-# Then add an accessor method that allows you to view, but not modify, the year of your car.
-
-
-# You want to create a nice interface that allows you to accurately describe the action you want your program to perform. 
-# - Create a method called spray_paint that can be called on an object and will modify the color of the car.
-
-
 # instance vars: year, color, model, current_speed init. to 0
 # instance methods: speed_up, brake, shut_engine
-# accessors: view & change car color
+# accessors: view & change car color (SprayPaint)
 # readers: year
 
 # > Classes and Objects II
-# Add a class method to your MyCar class that calculates the gas mileage (i.e. miles per gallon) of any car.
+# calculate gas mileage (i.e. miles per gallon) of any car.
 # Override the to_s method to create a user friendly print out of your object.
 
 # > Inheritance
@@ -48,28 +35,6 @@ end
 class Vehicle
   @@number_of_vehicles = 0
 
-  def self.number_of_vehicles
-    puts "This program has created #{@@number_of_vehicles} vehicles"
-  end
-
-  def self.gas_mileage(gallons, miles)
-    puts "#{miles / gallons} miles per gallon of gas"
-  end
-
-  def initialize
-    @@number_of_vehicles += 1
-  end
-end
-
-class MyTruck < Vehicle
-  include Towable
-  NUMBER_OF_DOORS = 2
-end
-
-class MyCar < Vehicle
-  include SprayPaint
-
-  NUMBER_OF_DOORS = 4
 
   attr_accessor :color
   attr_reader :year, :model, :current_speed, :engine_state
@@ -80,6 +45,7 @@ class MyCar < Vehicle
     @color = c
     @current_speed = 0
     @engine_state = 'off'
+    @@number_of_vehicles += 1
   end
 
   def speed_up(increase_by)
@@ -98,87 +64,101 @@ class MyCar < Vehicle
     @engine_state = 'off'
   end
 
+  def self.number_of_vehicles
+    puts "This program has created #{@@number_of_vehicles} vehicles"
+  end
+
+  def self.gas_mileage(gallons, miles)
+    puts "#{miles / gallons} miles per gallon of gas"
+  end
+
+end
+
+class MyTruck < Vehicle
+  include Towable
+  NUMBER_OF_DOORS = 2
+
+  def to_s
+    "My truck is a #{color}, #{year}, #{@model}!"
+  end
+end
+
+class MyCar < Vehicle
+  include SprayPaint
+  NUMBER_OF_DOORS = 4
+
   def to_s
     "My car is a #{color}, #{year}, #{@model}!"
   end
 
 end
 
-# Results:
-# irb(main):001> load "./classes_and_objects_I.rb"
-# => true
-# irb(main):002> d = MyCar.new(2020,"VW Golf GTI", "Black")
-# => #<MyCar:0x000001be94949bf8 @color="Black", @current_speed=0, @engine_state="off", @model="VW Golf GTI", @year=2020>
-# irb(main):003> d.year
-# => 2020
-# irb(main):004> d.model
-# => "VW Golf GTI"
-# irb(main):005> d.color
-# => "Black"
-# irb(main):006> d.engine_state
-# => "off"
-# irb(main):007> d.current_speed
-# => 0
-# irb(main):008> d.start_engine
-# => "on"
-# irb(main):009> d.engine_state
-# => "on"
-# irb(main):010> d.speed_up(50)
-# => 50
-# irb(main):011> d.current_speed
-# => 50
-# irb(main):012> d.brake(20)
-# => 30
-# irb(main):013> d.current_speed
-# => 30
-# irb(main):014> d.spray_paint("Candy Purple")
-# => "Candy Purple"
-# irb(main):015> d.color
-# => "Candy Purple"
+# MyCar
+d = MyCar.new(2020, "VW Golf GTI", "Black")
+puts d.year           # => 2020
+puts d.model          # => "VW Golf GTI"
+puts d.color          # => "Black"
+puts d.engine_state   # => "off"
+puts d.current_speed  # => 0
+
+d.start_engine        # => "on"
+puts d.engine_state   # => "on"
+
+d.speed_up(50)        # => 50
+puts d.current_speed  # => 50
+
+d.brake(20)           # => 30
+puts d.current_speed  # => 30
+
+d.spray_paint("Candy Purple") # => "Your new Candy Purple paint job looks great!"
+puts d.color          # => "Candy Purple"
+
+# MyTruck (no spray_paint)
+t = MyTruck.new(2018, "Toyota Tacoma", "Silver")
+puts t.year           # => 2018
+puts t.model          # => "Toyota Tacoma"
+puts t.color          # => "Silver"
+puts t.engine_state   # => "off"
+puts t.current_speed  # => 0
+
+t.start_engine        # => "on"
+puts t.engine_state   # => "on"
+
+t.speed_up(40)        # => 40
+puts t.current_speed  # => 40
+
+t.brake(15)           # => 25
+puts t.current_speed  # => 25
+
+# Towing test (from Towable module)
+puts t.can_tow?(1500) # => true
+puts t.can_tow?(2500) # => false
 
 
-# Classes and Objects II Q3
-# class Person
-#   attr_reader :name
-#   def initialize(name)
-#     @name = name
-#   end
-# end
 
-# bob = Person.new("Steve")
-# bob.name = "Bob"
-
-# ERROR:
-# test.rb:9:in `<main>': undefined method `name=' for
-  #<Person:0x007fef41838a28 @name="Steve"> (NoMethodError)
-  
-# line 107 is a no method error since @name the instance variable is read-only and has no getter defined via attr_reader.
-# Change to attr_writer or attr_accessor to fix.
 
 # Inheritance Q7
-# puts "Well done!" if joe.better_grade_than?(bob)
+# puts "Well done!" if joe.better_grade_than?(bob) -> Make this work!
+class Student
+  def initialize(name, grade)
+    @name = name
+    @grade = grade
+  end
 
-# ANS:
-# class Student
-#   def initialize(name, grade)
-#     @name = name
-#     @grade = grade
-#   end
+  def better_grade_than?(other_student)
+    grade > other_student.grade
+  end
 
-#   def better_grade_than?(other_student)
-#     grade > other_student.grade
-#   end
+  protected
 
-#   protected
+  def grade
+    @grade
+  end
+end
 
-#   def grade
-#     @grade
-#   end
-# end
-
-# joe = Student.new("Joe", 90)
-# bob = Student.new("Bob", 84)
-# puts "Well done!" if joe.better_grade_than?(bob)
+joe = Student.new("Joe", 90)
+bob = Student.new("Bob", 84)
+puts "Well done!" if joe.better_grade_than?(bob)
 
 # Inheritance Q8
 # bob = Person.new

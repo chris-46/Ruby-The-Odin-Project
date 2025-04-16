@@ -67,37 +67,26 @@ class MyCar
 
 end
 
-# Results:
-# irb(main):001> load "./classes_and_objects_I.rb"
-# => true
-# irb(main):002> d = MyCar.new(2020,"VW Golf GTI", "Black")
-# => #<MyCar:0x000001be94949bf8 @color="Black", @current_speed=0, @engine_state="off", @model="VW Golf GTI", @year=2020>
-# irb(main):003> d.year
-# => 2020
-# irb(main):004> d.model
-# => "VW Golf GTI"
-# irb(main):005> d.color
-# => "Black"
-# irb(main):006> d.engine_state
-# => "off"
-# irb(main):007> d.current_speed
-# => 0
-# irb(main):008> d.start_engine
-# => "on"
-# irb(main):009> d.engine_state
-# => "on"
-# irb(main):010> d.speed_up(50)
-# => 50
-# irb(main):011> d.current_speed
-# => 50
-# irb(main):012> d.brake(20)
-# => 30
-# irb(main):013> d.current_speed
-# => 30
-# irb(main):014> d.spray_paint("Candy Purple")
-# => "Candy Purple"
-# irb(main):015> d.color
-# => "Candy Purple"
+# Test Run:
+d = MyCar.new(2020, "VW Golf GTI", "Black")
+puts d.year           # => 2020
+puts d.model          # => "VW Golf GTI"
+puts d.color          # => "Black"
+puts d.engine_state   # => "off"
+puts d.current_speed  # => 0
+
+d.start_engine        # => "on"
+puts d.engine_state   # => "on"
+
+d.speed_up(50)        # => 50
+puts d.current_speed  # => 50
+
+d.brake(20)           # => 30
+puts d.current_speed  # => 30
+
+d.spray_paint("Candy Purple") # => "Your new Candy Purple paint job looks great!"
+puts d.color          # => "Candy Purple"
+
 
 
 # Classes and Objects II Q3

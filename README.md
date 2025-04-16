@@ -70,7 +70,7 @@ Following The Odin Project, I will work on projects involving **Cucumber** and *
     - More Modules ✅
     - Private, Protected, and Public ✅
     - Accidental Method Overriding ✅
-    - Exercises: `Vehicle` and `MyCar` ✅
+    - Exercises: `Vehicle`: `MyTruck` and `MyCar` ✅
 - Project Management
 - Linting and RuboCop
 - Project: Tic Tac Toe
