@@ -37,7 +37,7 @@ Following The Odin Project, I will work on projects involving **Cucumber** and *
   - Back to 1st year CS with Bubble Sort, but trying the **#times** method and a fancy swapping trick!
 
 ### Object Oriented Programming 
-- Object Oriented Programming: [Launch Schools's Ruby OOP Book](https://launchschool.com/books/oo_ruby/read/introduction)
+- Object Oriented Programming: [Launch Schools's Ruby OOP Book](https://launchschool.com/books/oo_ruby/read/introduction) ✅
   - The Object Model ✅
     - Why OOP? ✅
     - What are Objects? ✅
@@ -71,7 +71,8 @@ Following The Odin Project, I will work on projects involving **Cucumber** and *
     - Private, Protected, and Public ✅
     - Accidental Method Overriding ✅
     - Exercises: `Vehicle`: `MyTruck` and `MyCar` ✅
-- Project Management
+- Project Management ✅
+  - `Gems`, `Bundler`, `Gemfiles`, and `require` vs. `require_relative`
 - Linting and RuboCop
 - Project: Tic Tac Toe
 - Project: Mastermind
