@@ -9,7 +9,7 @@
 # Override the to_s method to create a user friendly print out of your object.
 
 # > Inheritance
-# Create a superclass called Vehicle for your MyCar class to inherit from and move the behavior that isn't specific to the MyCar class to the superclass. 
+# Create a superclass called Vehicle for your MyCar class to inherit from and move the behavior that isn't specific to the MyCar class to the superclass.
 # - Create a constant in your MyCar class that stores information about the vehicle that makes it different from other types of Vehicles.
 
 # Then create a new class called MyTruck that inherits from your superclass that also has a constant defined that separates it from the MyCar class in some way.
@@ -38,7 +38,7 @@ class Vehicle
 
   attr_accessor :color
   attr_reader :year, :model, :current_speed, :engine_state
-  
+
   def initialize(y, m, c)
     @year = y
     @model = m
@@ -71,7 +71,6 @@ class Vehicle
   def self.gas_mileage(gallons, miles)
     puts "#{miles / gallons} miles per gallon of gas"
   end
-
 end
 
 class MyTruck < Vehicle
@@ -90,11 +89,10 @@ class MyCar < Vehicle
   def to_s
     "My car is a #{color}, #{year}, #{@model}!"
   end
-
 end
 
 # MyCar
-d = MyCar.new(2020, "VW Golf GTI", "Black")
+d = MyCar.new(2020, 'VW Golf GTI', 'Black')
 puts d.year           # => 2020
 puts d.model          # => "VW Golf GTI"
 puts d.color          # => "Black"
@@ -110,11 +108,11 @@ puts d.current_speed  # => 50
 d.brake(20)           # => 30
 puts d.current_speed  # => 30
 
-d.spray_paint("Candy Purple") # => "Your new Candy Purple paint job looks great!"
-puts d.color          # => "Candy Purple"
+d.spray_paint('Candy Purple') # => "Your new Candy Purple paint job looks great!"
+puts d.color # => "Candy Purple"
 
 # MyTruck (no spray_paint)
-t = MyTruck.new(2018, "Toyota Tacoma", "Silver")
+t = MyTruck.new(2018, 'Toyota Tacoma', 'Silver')
 puts t.year           # => 2018
 puts t.model          # => "Toyota Tacoma"
 puts t.color          # => "Silver"
@@ -151,14 +149,12 @@ class Student
 
   protected
 
-  def grade
-    @grade
-  end
+  attr_reader :grade
 end
 
-joe = Student.new("Joe", 90)
-bob = Student.new("Bob", 84)
-puts "Well done!" if joe.better_grade_than?(bob)
+joe = Student.new('Joe', 90)
+bob = Student.new('Bob', 84)
+puts 'Well done!' if joe.better_grade_than?(bob)
 
 # Inheritance Q8
 # bob = Person.new

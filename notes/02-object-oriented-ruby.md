@@ -1847,20 +1847,23 @@ The output resembles stack traces a little bit:
 - Further, you learn of the **Department/Cop** - in this case, you’re dealing with `StringLiterals Cop` from the **Style** department. 
 
 - Finally, you are directly told **what and where is the offending part of code**. 
-  - Here, RuboCop pointed out that this string could very well be single-quoted, as that string doesn’t use anything that comes with double-quoted strings.
+  - Here, RuboCop pointed out that this string could very well be **single-quoted**, as that string doesn’t use anything that comes with double-quoted strings (to use for string interpolation or special symbols).
 
 You could ask why such a foundational Gem as Bundler can run into trouble with the law. 
 - The answer is that RuboCop is highly customizable to accommodate many standards that programmers might have.
 
 Before you unleash the automated fury of RuboCop upon your code, you might want to become acquainted with a nifty flag: -S. This will provide a link to the Ruby Style Guide that goes over the rationale for the offense, if the Cop has such link when bundle exec rubocop -S is used:
 
+```
 Gemfile:3:8: C: [Correctable] Style/StringLiterals: Prefer single-quoted strings when you don\'t need string interpolation or special symbols. (https://rubystyle.guide#consistent-string-literals)
 source "https://rubygems.org"
-       ^^^^^^^^^^^^^^^^^^^^^^
+       ^^^^^^^^^^^^^^^^^^^^^^       
+```
 Nifty, eh?
 
-But I hear you - you’re here for action. So let’s go for the -a flag, a for action! (Actually, it stands for autocorrect but that’s not as fun) bundle exec rubocop -a, go!
+But I hear you - you’re here for action. So let’s go for the `-a` flag, a for action! (Actually, it stands for **autocorrect** but that’s not as fun) `bundle exec rubocop -a` , go!
 
+```ruby
 Inspecting 2 files
 .C
 
@@ -1884,6 +1887,8 @@ caesars_cipher.rb:16:8: C: [Corrected] Style/StringLiterals: Prefer single-quote
 
 2 files inspected, 16 offenses detected, 14 offenses corrected, 2 more offenses can be corrected with rubocop -A
 # Duplicate offenses were truncated.
+```
+
 See that .? That means the first file is now all fine and dandy! Some of the offenses were not corrected by RuboCop and that’s because -a is for safe autocorrect. If you wanted to go through with the [Correctable] offenses, you’d want to use -A as the output helpfully suggests. This is due to the fact that some Cops are safe, some are unsafe.
 
 The safe Cops promise that they won’t have false positives and that their autocorrect won’t change the semantics of the code and it will be fully equivalent to what you had written.
