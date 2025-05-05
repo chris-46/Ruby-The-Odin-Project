@@ -73,7 +73,7 @@ Following The Odin Project, I will work on projects involving **Cucumber** and *
     - Exercises: `Vehicle`: `MyTruck` and `MyCar` ✅
 - Project Management ✅
   - `Gems`, `Bundler`, `Gemfiles`, and `require` vs. `require_relative`
-- Linting and RuboCop
+- Linting and RuboCop ✅
 - Project: Tic Tac Toe
 - Project: Mastermind
 
