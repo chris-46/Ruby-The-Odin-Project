@@ -1,0 +1,1 @@
+# This class gets user inputs and starts the game by creating the requisite instances and objects.
